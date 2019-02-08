@@ -26,7 +26,7 @@ class Tweet:
         wind_speed = weather['wind_speed']
         rain = weather['rain']
 
-        tweet = 'Temperatuur in #Annen: {temperature} \u2103. {condition}. \n' \
+        tweet = 'Temperatuur in #Annen: {temperature} \u2103 . {condition}. \n' \
                 'Luchtvochtigheid: {humidity}% \n' \
                 'Barometer: {pressure}hpa \n' \
                 'Wind: {direction}, {speed} bft\n' \
