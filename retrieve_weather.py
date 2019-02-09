@@ -1,10 +1,11 @@
 import requests
+import config as c
 
 
 class OpenWeatherMap:
     def __init__(self):
         self.city_id = '2755250'
-        self.app_id = '8b3831efce98b857f0a39b968611d069'
+        self.app_id = c.app_id
         self.url = 'http://api.openweathermap.org/data/2.5/forecast'
         self.lang = 'nl'
         self.weather = requests.get(url=self.url, params=dict(id=self.city_id, APPID=self.app_id,
@@ -25,6 +26,7 @@ class OpenWeatherMap:
         for condition in range(len(self.weather['list'][0]['weather'])):
             condition_descriptions.append(self.weather['list'][0]['weather'][0]['description'])
             condition_descriptions_text = ','.join(condition_descriptions).capitalize()
+        icon = self.weather['list'][0]['weather'][0]['icon'] + '.png'
         weather_3h = self.weather['list'][0]['main']
         rain_3h = self.weather['list'][0]['rain']
         wind_3h = self.weather['list'][0]['wind']
@@ -38,7 +40,7 @@ class OpenWeatherMap:
 
         weather_dict = {'temperature': temperature, 'pressure': pressure, 'humidity': humidity, 'wind_speed':
                         wind_speed, 'wind_direction': wind_direction, 'rain': rain, 'url': url,
-                        'condition': condition_descriptions_text}
+                        'condition': condition_descriptions_text, 'icon': icon}
 
         return weather_dict
 
