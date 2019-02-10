@@ -21,7 +21,7 @@ class Tweet:
     def create_tweet():
         weather = current_weather.parse_weather()
         temperature = weather['temperature']
-        degrees = u'\N{DEGREE SIGN}'
+        degrees = u'\u00b0'.encode("UTF-8")
         condition = weather['condition']
         humidity = weather['humidity']
         pressure = weather['pressure']
