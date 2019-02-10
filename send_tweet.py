@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import tweepy
 import config as c
 from retrieve_weather import OpenWeatherMap
