@@ -21,7 +21,7 @@ class Tweet:
     def create_tweet():
         weather = current_weather.parse_weather()
         temperature = weather['temperature']
-        degrees = '\u2103 '
+        degrees = u'\N{DEGREE SIGN}'
         condition = weather['condition']
         humidity = weather['humidity']
         pressure = weather['pressure']
@@ -29,7 +29,7 @@ class Tweet:
         wind_speed = weather['wind_speed']
         rain = weather['rain']
 
-        tweet = 'Temperatuur in #Annen: {temperature}{degrees}' \
+        tweet = 'Temperatuur in #Annen: {temperature}{degrees} ' \
                 '{condition}. \n' \
                 'Luchtvochtigheid: {humidity}% \n' \
                 'Barometer: {pressure}hpa \n' \
