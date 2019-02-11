@@ -21,6 +21,7 @@ class OpenWeatherMap:
 
     def parse_weather(self):
         url = self.weather_url
+        print(url)
         condition_descriptions = []
         condition_descriptions_text = ''
         for condition in range(len(self.weather['list'][0]['weather'])):
@@ -32,12 +33,14 @@ class OpenWeatherMap:
         wind_3h = self.weather['list'][0]['wind']
 
         temperature = int(weather_3h['temp']) - 273
-        pressure = weather_3h['pressure']
+        pressure = int(weather_3h['pressure'])
         humidity = weather_3h['humidity']
         wind_speed = self.wind_ms_to_beaufort(wind_3h['speed'])
         wind_direction = self.wind_degrees_to_directional(wind_3h['deg'])
-        rain = rain_3h['3h']
-
+        try:
+            rain = round(float(rain_3h['3h'], 1))
+        except KeyError:
+            rain = '0'
         weather_dict = {'temperature': temperature, 'pressure': pressure, 'humidity': humidity, 'wind_speed':
                         wind_speed, 'wind_direction': wind_direction, 'rain': rain, 'url': url,
                         'condition': condition_descriptions_text, 'icon': icon}
