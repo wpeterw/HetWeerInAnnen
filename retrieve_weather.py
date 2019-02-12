@@ -12,7 +12,7 @@ class OpenWeatherMap:
                                                               lang=self.lang)).json()
         self.weather_url = requests.get(url=self.url, params=dict(id=self.city_id, APPID=self.app_id,
                                         lang=self.lang)).url
-        self.dirs = ["N", "NNO", "NO", "ONO", "O", "OZP", "ZO", "ZZO", "Z", "ZZW", "ZW", "WZW", "W", "WNW", "NW", "NNW"]
+        self.dirs = ["N", "NNO", "NO", "ONO", "O", "OZO", "ZO", "ZZO", "Z", "ZZW", "ZW", "WZW", "W", "WNW", "NW", "NNW"]
         self._bft_threshold = (0.3, 1.5, 3.4, 5.4, 7.9, 10.7, 13.8, 17.1, 20.7, 24.4, 28.4, 32.6)
 
     def full_weather(self):
@@ -38,7 +38,9 @@ class OpenWeatherMap:
         wind_speed = self.wind_ms_to_beaufort(wind_3h['speed'])
         wind_direction = self.wind_degrees_to_directional(wind_3h['deg'])
         try:
-            rain = round(float(rain_3h['3h'], 1))
+            rain = rain_3h['3h']
+            rain = float(rain)
+            rain = round(rain, 1)
         except KeyError:
             rain = '0'
         weather_dict = {'temperature': temperature, 'pressure': pressure, 'humidity': humidity, 'wind_speed':
