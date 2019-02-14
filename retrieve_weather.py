@@ -29,9 +29,11 @@ class OpenWeatherMap:
             condition_descriptions_text = ','.join(condition_descriptions).capitalize()
         icon = self.weather['list'][0]['weather'][0]['icon'] + '.png'
         weather_3h = self.weather['list'][0]['main']
-        rain_3h = self.weather['list'][0]['rain']
+        try:
+            rain_3h = self.weather['list'][0]['rain']
+        except KeyError:
+            pass
         wind_3h = self.weather['list'][0]['wind']
-
         temperature = int(weather_3h['temp']) - 273
         pressure = int(weather_3h['pressure'])
         humidity = weather_3h['humidity']
