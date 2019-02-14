@@ -32,6 +32,7 @@ class OpenWeatherMap:
         try:
             rain_3h = self.weather['list'][0]['rain']
         except KeyError:
+            rain_3h = {'3h': '0.0'}
             pass
         wind_3h = self.weather['list'][0]['wind']
         temperature = int(weather_3h['temp']) - 273
@@ -39,12 +40,7 @@ class OpenWeatherMap:
         humidity = weather_3h['humidity']
         wind_speed = self.wind_ms_to_beaufort(wind_3h['speed'])
         wind_direction = self.wind_degrees_to_directional(wind_3h['deg'])
-        try:
-            rain = rain_3h['3h']
-            rain = float(rain)
-            rain = round(rain, 1)
-        except KeyError:
-            rain = '0'
+        rain = rain_3h['3h']
         weather_dict = {'temperature': temperature, 'pressure': pressure, 'humidity': humidity, 'wind_speed':
                         wind_speed, 'wind_direction': wind_direction, 'rain': rain, 'url': url,
                         'condition': condition_descriptions_text, 'icon': icon}
